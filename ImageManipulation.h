@@ -22,14 +22,14 @@ namespace IM {
         Mat templ;
         Mat templ_result;
         ImageManipulation();
-        ImageManipulation(Mat* data);
+        ImageManipulation(const Mat* data);
         ~ImageManipulation();
 
-        Mat* CannyThreshold(int blur_filter_size, int low_threshold, int ratio, int kernel_size);
+        Mat* CannyThreshold(const int blur_filter_size, const int low_threshold, const int ratio, const int kernel_size);
         Mat* Histogram();
         double SimpleTemplateMatch(int match_method, Point &result, std::vector<double> &scales);
         void AdvancedTemplateMatch();
-        void set_original_image(Mat &original_image);
+        void set_original_image(const Mat &original_image);
     };
 }
 

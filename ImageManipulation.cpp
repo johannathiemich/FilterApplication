@@ -10,12 +10,12 @@ using namespace std;
 ImageManipulation::ImageManipulation() {
 }
 
-ImageManipulation::ImageManipulation(Mat* data) {
+ImageManipulation::ImageManipulation(const Mat* data) {
     data->copyTo(this->original_image);
     //cvtColor(this->original_color, this->original_image, COLOR_BGR2GRAY);
     canny_image.create(data->size(), data->type());
     histogram_image.create(data->size(), data->type());
-    templ = imread("./drone_marker.png", CV_LOAD_IMAGE_GRAYSCALE);
+    templ = imread("./images/drone_marker.png", IMREAD_GRAYSCALE);
 }
 
 ImageManipulation::~ImageManipulation() {
@@ -24,15 +24,15 @@ ImageManipulation::~ImageManipulation() {
     this->histogram_image.release();
 }
 
-void ImageManipulation::set_original_image(Mat &original_image) {
+void ImageManipulation::set_original_image(const Mat &original_image) {
     this->original_image = original_image;
     //cvtColor(original_image, this->original_image, COLOR_BGR2GRAY);
     canny_image.create(original_image.size(), original_image.type());
     histogram_image.create(original_image.size(), original_image.type());
-    templ = imread("/home/johanna/CLionProjects/FilterApplication/drone_marker.png", CV_LOAD_IMAGE_GRAYSCALE);
+    templ = imread("./images/drone_marker.png", IMREAD_GRAYSCALE);
 }
 
-Mat* ImageManipulation::CannyThreshold(int blur_filter_size, int low_threshold, int ratio, int kernel_size)
+Mat* ImageManipulation::CannyThreshold(const int blur_filter_size, const int low_threshold, const int ratio, const int kernel_size)
 {
     cv::Mat detected_edges;
     detected_edges.create(this->original_image.size(), this->original_image.type());
@@ -46,7 +46,7 @@ Mat* ImageManipulation::Histogram() {
     return &this->histogram_image;
 }
 
-double ImageManipulation::SimpleTemplateMatch(int match_method, Point& result, std::vector<double> &scales) {
+double ImageManipulation::SimpleTemplateMatch(const int match_method, Point& result, std::vector<double> &scales) {
     Mat resized;
     double min_val, max_val, temp_score, max_score, max_scale;
     max_score = -1;

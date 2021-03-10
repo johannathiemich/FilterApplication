@@ -5,9 +5,8 @@
 #include "Utils.h"
 
 //https://stackoverflow.com/questions/27028226/python-linspace-in-c
-std::vector<double> linspace(double start_in, double end_in, int num_in)
+std::vector<double> linspace(const double start_in, const double end_in, const int num_in)
 {
-
     std::vector<double> linspaced;
 
     auto start = static_cast<double>(start_in);
@@ -34,7 +33,7 @@ std::vector<double> linspace(double start_in, double end_in, int num_in)
     return linspaced;
 }
 
-cv::Mat makeCanvas(std::vector<cv::Mat> vecMat, int windowHeight, int nRows)
+cv::Mat makeCanvas(const std::vector<cv::Mat> &vecMat, const int windowHeight, const int nRows)
 {
     int N = vecMat.size();
     nRows  = nRows > N ? N : nRows;
@@ -71,7 +70,7 @@ cv::Mat makeCanvas(std::vector<cv::Mat> vecMat, int windowHeight, int nRows)
             cv::Mat target_ROI(s, CV_8UC3);
             if (vecMat[k].channels() != canvasImage.channels()) {
                 if (vecMat[k].channels() == 1) {
-                    cv::cvtColor(vecMat[k], target_ROI, CV_GRAY2BGR);
+                    cv::cvtColor(vecMat[k], target_ROI, COLOR_GRAY2BGR);
                 }
             } else {
                 vecMat[k].copyTo(target_ROI);
@@ -87,7 +86,7 @@ cv::Mat makeCanvas(std::vector<cv::Mat> vecMat, int windowHeight, int nRows)
     return canvasImage;
 }
 
-void CannyThreshold(cv::Mat input_image, cv::Mat output, int blur_filter_size, int low_threshold, int ratio, int kernel_size)
+void CannyThreshold(const cv::Mat &input_image, cv::Mat &output, const int blur_filter_size, const int low_threshold, const int ratio, const int kernel_size)
 {
     cv::Mat detected_edges;
     detected_edges.create(input_image.size(), input_image.type());

@@ -13,7 +13,7 @@ using namespace cv;
 
 cv::Mat makeCanvas(std::vector<cv::Mat>, int windowHeight, int nRows);
 
-std::vector<double> linspace(double start_in, double end_in, int num_in);
+std::vector<double> linspace(const double start_in, const double end_in, const int num_in);
 
 
 #endif //FILTERAPPLICATION_UTILS_H

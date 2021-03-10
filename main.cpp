@@ -52,6 +52,4 @@ int main() {
         if (cv::waitKey(10) == 27) break;
     }
 
-
-
 }
